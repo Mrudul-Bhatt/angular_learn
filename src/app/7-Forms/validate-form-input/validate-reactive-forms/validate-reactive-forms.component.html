@@ -1,0 +1,34 @@
+<form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+  <label for="username">Username</label>
+  <input id="username" formControlName="username" />
+  <div *ngIf="myForm.get('username')?.errors?.['required']">
+    Username is required
+  </div>
+  <div *ngIf="myForm.get('username')?.errors?.['minlength']">
+    Username must be at least 3 characters
+  </div>
+
+  <label for="email">Email</label>
+  <input id="email" formControlName="email" />
+  <div *ngIf="myForm.get('email')?.errors?.['required']">Email is required</div>
+  <div *ngIf="myForm.get('email')?.errors?.['email']">Enter a valid email</div>
+
+  <label for="password">Password</label>
+  <input id="password" type="password" formControlName="password" />
+  <div *ngIf="myForm.get('password')?.errors?.['required']">
+    Password is required
+  </div>
+  <div *ngIf="myForm.get('password')?.errors?.['minlength']">
+    Password must be at least 8 characters
+  </div>
+
+  <div *ngIf="myForm.get('username')?.errors?.['specialCharacters']">
+    Special characters are not allowed.
+  </div>
+
+  <div *ngIf="myForm.get('username')?.errors?.['usernameTaken']">
+    Username already taken.
+  </div>
+
+  <button type="submit" [disabled]="myForm.invalid">Submit</button>
+</form>

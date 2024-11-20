@@ -1,0 +1,55 @@
+<form #form="ngForm" (ngSubmit)="onSubmit(form)">
+  <!-- Name Input -->
+  <label>
+    Name:
+    <input
+      type="text"
+      name="name"
+      [(ngModel)]="user.name"
+      required
+      minlength="3"
+    />
+  </label>
+  <div *ngIf="form.controls['name']?.invalid && form.controls['name']?.touched">
+    <div *ngIf="form.controls['name']?.errors?.['required']">
+      Name is required.
+    </div>
+    <div *ngIf="form.controls['name']?.errors?.['minlength']">
+      Name must be at least 3 characters.
+    </div>
+  </div>
+
+  <!-- Email Input -->
+  <label>
+    Email:
+    <input type="email" name="email" [(ngModel)]="user.email" required email />
+  </label>
+  <div
+    *ngIf="form.controls['email']?.invalid && form.controls['email']?.touched"
+  >
+    <div *ngIf="form.controls['email']?.errors?.['required']">
+      Email is required.
+    </div>
+    <div *ngIf="form.controls['email']?.errors?.['email']">
+      Invalid email format.
+    </div>
+  </div>
+
+  <!-- Custom Validation -->
+  <label>
+    Username:
+    <input
+      type="text"
+      name="username"
+      [(ngModel)]="user.username"
+      appForbiddenName
+      required
+    />
+  </label>
+  <div *ngIf="form.controls['username']?.errors?.['forbiddenName']">
+    Username "admin" is not allowed.
+  </div>
+
+  <!-- Submit Button -->
+  <button type="submit" [disabled]="form.invalid">Submit</button>
+</form>

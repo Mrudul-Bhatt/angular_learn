@@ -1,0 +1,31 @@
+<form (ngSubmit)="this.onSubmit" [formGroup]="this.userProfileForm">
+  <label>
+    Name:
+    <input formControlName="name"/>
+  </label>
+
+  <label>
+    Email:
+    <input formControlName="email"/>
+  </label>
+
+  <!-- Nested form group for address -->
+  <div formGroupName="address">
+    <label>
+      Street:
+      <input formControlName="street"/>
+    </label>
+
+    <label>
+      City:
+      <input formControlName="city"/>
+    </label>
+
+    <label>
+      Postal Code:
+      <input formControlName="postalCode"/>
+    </label>
+  </div>
+
+  <button [disabled]="this.userProfileForm.invalid" type="submit">Submit</button>
+</form>
